@@ -10,7 +10,7 @@ public class Feeder {
         currentFood = food;
     }
 public int getCurrentFood(){
-return currentFood;
+        return currentFood;
 }
 
     /**
@@ -20,23 +20,33 @@ return currentFood;
     public void simulateOneDay(int numBirds)
     {
         if (Math.random() < 0.05) currentFood = 0;
-        else {
+        else
+        {
             int eaten = (int) (Math.random() * 41) + 10;
             eaten *= numBirds;
             currentFood -= eaten;
-            if (currentFood < 0) currentFood = 0;
-        }}}
+        }
+        if (currentFood < 0 ) currentFood = 0;
+    }
+
+
+
    /**
-     * Returns the number of days birds or a bear found food to eat at the
+     * Returns the number of     days birds or a bear found food to eat at the
      * feeder in this simulation, as described in part (b) Preconditions:
      * numBirds > 0, numDays > 0
      */
+
    public int simulateManyDays(int numBirds, int numDays)
-{
-    int days = 0;
-    while (numDays > 0)
-    {
-        simulateManyDays(numBirds);
-    }
-    return 0;
+   {
+       int days = 0;
+       while (numDays > 0)
+       {
+           if (currentFood == 0) return days;
+           simulateOneDay(numBirds);
+           numDays--;
+           days++;
+       }
+       return days;
+   }
 }
